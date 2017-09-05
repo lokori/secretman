@@ -103,7 +103,7 @@ Set admin PIN and normal user PIN. Try not to forget these or you will be totall
 
 File encryption is based on the smart card properties of the card. This means user needs to install enough software to talk to smart cards and there are several alternatives to doing this. See [Yubico articles on OpenPGP](https://www.yubico.com/support/knowledge-base/categories/articles/use-yubikey-openpgp/).
 
-Being a programmer I want an easy solution. There are two scripts in this repository: ```poke.sh``` and ```peek.sh```. 
+Being a programmer I want an easy solution. There are two scripts in this repository: [poke.sh](/poke.sh) and [peek.sh](/peek.sh). 
 
 Basically these are wrappers to call opengpg to encrypt and decrypt stuff identified by a key, which is also the name of the file written by the script.
 If you use the scripts, change the directory for storing the secrets if necessary. This is a very crude "password manager" at the moment. Also, you should
