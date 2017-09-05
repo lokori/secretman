@@ -11,8 +11,8 @@ encrypting files, signing data digitally and as a two-factor authentication mech
 access to the secret keys necessary for those feats and these secret keys can't be extracted. (At least, there are no known exploits or practical ways
 to extract the keys or make a copy of the key).
 
-Yubikey is not unique, there are other similar products emerging, such as [OnlyKey](https://www.amazon.com/OnlyKey-Color-Password-Manager-Obsolete/dp/B06Y1CSRZX) which
-essentially is similar to Yubikey.
+Yubikey is not unique, there are other similar products emerging, such as [OnlyKey](https://www.amazon.com/OnlyKey-Color-Password-Manager-Obsolete/dp/B06Y1CSRZX), which
+is essentially similar to Yubikey.
 
 Overview of the topics and possibilities:
 
@@ -21,7 +21,7 @@ Overview of the topics and possibilities:
 
 ## Use-case 1: two-factor authentication, using FIDO U2F
 
-The most common two-factor authentication is perhaps Google Authenticator used with a phone. SMS being perhaps the second most popular. RSA dongles work, but they
+The most common two-factor authentication is perhaps [Google Authenticator](https://en.wikipedia.org/wiki/Google_Authenticator) used with a phone. SMS being perhaps the second most popular. RSA dongles work, but they
 cost money and can't be used for anything else so they are out for most normal use cases.
 
 FIDO U2F is a new standard and super simple way for user to authenticate actions for a web application. This [FIDO U2F tutorial](https://fidoalliance.org/assets/downloads/FIDO-U2F-UAF-Tutorial-v1.pdf) explains how it works internally. The important thing is that a web browser (and web application) is allowed to talk with FIDO U2F compliant USB device without resorting to complicated things like WebUSB. 
@@ -101,13 +101,43 @@ Basically these are wrappers to call opengpg to encrypt and decrypt stuff identi
 If you use the scripts, change the directory for storing the secrets if necessary. This is a very crude "password manager" at the moment. Also, you should
 change the key identifier to match the key identifier of your encryption key if you decide to use these scripts.
 
-Encryption (XXXX being your key id):
+Call gpg for encryption (XXXX being your key id):
 ```
 gpg --encrypt --armor --recipient XXXXX > secret.txt
 ```
 
-Decrypt:
+And decrypt:
 cat secret.txt | gpg --decrypt
+
+### Poke/peek scripts
+
+* ask confirmation for overwriting existing key
+* can read data from stdin or command line argument
+* you could use / or other special characters for key and cause problems. Use common sense.
+
+Example:
+
+```
+./poke.sh kak < kungfury.txt
+Securing data with vault key kak.
+Key exists, overwrite?  [y/N] y
+overwriting
+Data from standard input.
+```
+
+
+```
+./peek.sh kak
+Decrypting secret data with vault key kak
+
+![Insert card](insertcard.png)
+![enter PIN](enterpin.png)
+
+gpg: encrypted with 4096-bit RSA key, ID D2E72CF23AD1899D, created 2017-09-04
+      "Antti Virtanen <antti.virtanen@solita.fi>"
+secret two finger death punch
+```
+
 
 ### Making sure it can be decrypted even without the Yubikey in an emergency:
 
