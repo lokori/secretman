@@ -55,6 +55,14 @@ brew install pinentry-mac
 echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
 ```
 
+Pinentry program is used by gpg to ask for your PIN code (in case of Yubikey) or a passphrase (in case of a local passphrase protected key). In my case it's a graphical prompt like this:
+
+![Insert card](insertcard.png)
+![enter PIN](enterpin.png)
+
+Invalid pinentry configuration will prevent Yubikey from working.
+
+
 ### Generate keys
 
 See (https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/) for a good reference.
@@ -129,12 +137,6 @@ Data from standard input.
 ```
 ./peek.sh kak
 Decrypting secret data with vault key kak
-```
-
-![Insert card](insertcard.png)
-![enter PIN](enterpin.png)
-
-```
 gpg: encrypted with 4096-bit RSA key, ID D2E72CF23AD1899D, created 2017-09-04
       "Antti Virtanen <antti.virtanen@solita.fi>"
 secret two finger death punch
