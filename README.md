@@ -47,37 +47,37 @@ Here's a short summary. I use a Mac, so all steps are not appropriate for Linux 
 (Assumed that you are using Homebrew, but you almost certainly are if you are a developer working with a Mac)
 
 See (https://github.com/Homebrew/homebrew-core/issues/14737)
-´´´
+```
 brew install pinentry-mac
 echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
-´´´
+```
 
 ### Generate keys
 
 See (https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/) for a good reference.
 
 * Make backup copies of the keys 
-´´´
+```
 gpg --armor --export
 gpg --armor --export-secret-key
-´´´
+```
 
 Put these into a safe place, not connected to anything or powered up. If (when) you lose your Yubikey, these are the only way to recover or create a new Yubikey with the same secret keys. Consider that you could lose these too in a catastrophe and USB sticks and other things deteoriate over time.
 
 * Move keys to the Yubikey "smart card"
 
-´´´
+```
 gpg --edit-key XXXX
-´´´
+```
 
 select keys one at a time, transfer and save
 
 * Make sure everything is ok
 
-´´´
+```
 gpg --card-status
 gpg --list-secret-keys
-´´´
+```
 
 keylisting should show > for the moved keys.
 
