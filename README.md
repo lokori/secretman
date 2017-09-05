@@ -56,21 +56,22 @@ echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
 
 See (https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/) for a good reference.
 
-* Make backup copies of the keys 
+* Make backup copies of the keys, XX for each key id
 ```
-gpg --armor --export
-gpg --armor --export-secret-key
+gpg --armor --export XX > XX_key.pub
+gpg --armor --export-secret-key XX >> XX_key.priv
 ```
 
 Put these into a safe place, not connected to anything or powered up. If (when) you lose your Yubikey, these are the only way to recover or create a new Yubikey with the same secret keys. Consider that you could lose these too in a catastrophe and USB sticks and other things deteoriate over time.
 
 * Move keys to the Yubikey "smart card"
 
+Edit the main 
 ```
 gpg --edit-key XXXX
 ```
 
-select keys one at a time, transfer and save
+select keys one at a time, transfer ```keytocard``` and ```save```
 
 * Make sure everything is ok
 
