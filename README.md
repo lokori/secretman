@@ -129,10 +129,12 @@ Data from standard input.
 ```
 ./peek.sh kak
 Decrypting secret data with vault key kak
+```
 
 ![Insert card](insertcard.png)
 ![enter PIN](enterpin.png)
 
+```
 gpg: encrypted with 4096-bit RSA key, ID D2E72CF23AD1899D, created 2017-09-04
       "Antti Virtanen <antti.virtanen@solita.fi>"
 secret two finger death punch
