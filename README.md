@@ -16,7 +16,7 @@ essentially is similar to Yubikey.
 
 Overview of the topics and possibilities:
 
-[!Yubikey mindmap](/img/yubikey-map.png)
+![Yubikey mindmap](/img/yubikey-map.png)
 
 
 ## Use-case 1: two-factor authentication, using FIDO U2F
