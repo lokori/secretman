@@ -178,9 +178,10 @@ gpg --export-ssh-key XXXX > a_solita_ssh.pub
 * Get the key grip: ```gpg -k --with-keygrip```
 * Configure gpg-agent
 
+Example:
 ```
 killall gpg-agent
-echo '178A4816889A995C844A04CBBC23CA2DCEEBDF0A' > ~/.gnupg/sshcontrol 
+echo '1XOKASODKOASKDAOSKDAOKASD' > ~/.gnupg/sshcontrol 
 echo 'enable-ssh-support' >> ~/.gnupg/gpg-agent.conf
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
