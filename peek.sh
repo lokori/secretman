@@ -13,6 +13,6 @@ fi
 
 KEY=$1
 
-# TODO: uuencode ja decode
+
 cat "$VAULT/$KEY" | gpg --decrypt
 
