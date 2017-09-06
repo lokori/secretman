@@ -84,7 +84,7 @@ gpg --edit-key XXXX
 
 select keys one at a time, transfer ```keytocard``` and ```save```
 
-* Make sure everything is ok
+* Make sure everything is oks
 
 ```
 gpg --card-status
@@ -92,6 +92,13 @@ gpg --list-secret-keys
 ```
 
 keylisting should show > for the moved keys.
+
+* As explained in the referenced tutorial, it is reasonable to remove the ultimate master key from the system to prevent anyone from creating more subkeys.
+* After this the subkeys are "untrusted" and gpg will ask for confirmation. Make it trustworthy again to get rid of this:
+```
+gpg --edit-key XXXXX
+trust
+```
 
 
 ### Set Yubi PIN codes
@@ -141,6 +148,8 @@ gpg: encrypted with 4096-bit RSA key, ID D2E72CF23AD1899D, created 2017-09-04
       "Antti Virtanen <antti.virtanen@solita.fi>"
 secret two finger death punch
 ```
+
+NOTE: your secrets may get recorded in the command shell history. Do not leave them there.
 
 
 ### Making sure it can be decrypted even without the Yubikey in an emergency:
@@ -209,10 +218,28 @@ In progress.
 
 Amazon doesn't support FIDO U2F. Necessary to secure both management console and AWS CLI client.
 
-Some material:
+### Console with Yubikey Authenticator
+
+* [Download Yubikey Authenticator](https://www.yubico.com/support/knowledge-base/categories/articles/yubico-authenticator-download/) to emulate Google Authenticator TOTP protocol. 
+* Enable MFA from AWS console for the user.
+* Setup a backup device (offline) or save the Authenticator seed (QR-code) in a safe offline storage. Otherwise you may get locked out of your account after Yubikey is lost or destroyed one day.
+* Scan QR code for Authenticator (Authenticator captures it from the computer's screen).
+
+![Authenticator setup](/authenticator.png)
+
+* Enable password protection if you want more than a physical presence of Yubikey to secure the code.
+
+After this, the user can only log in to the AWS console if the Yubikey is physically present on the machine.
+
+
+
+
+
+Some material for cli:
 
 * https://github.com/phrase/aws-mfa
 * https://gist.github.com/woowa-hsw0/caa3340e2a7b390dbde81894f73e379d
+
 
 
 
