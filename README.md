@@ -36,9 +36,9 @@ Yubikey supports other authentication mechanisms and can be used to emulate Goog
 Being a programmer I want the solution to support command line access and automation as much as possible. Also, one must plan for the possibility that Yubikey is lost or destroyed for some reason. There must be a way to recover and one should test the recovery plan in advance to make sure it actually works.
 
 There are multiple tutorials about these things, here are some I used as a reference:
-* (https://github.com/drduh/YubiKey-Guide)
-* (https://florin.myip.org/blog/easy-multifactor-authentication-ssh-using-yubikey-neo-tokens)
-* (https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/)
+* https://github.com/drduh/YubiKey-Guide
+* https://florin.myip.org/blog/easy-multifactor-authentication-ssh-using-yubikey-neo-tokens
+* https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/
 
 Here's a short summary. I use a Mac, so all steps are not appropriate for Linux or Windows, ability to reason required.
 
