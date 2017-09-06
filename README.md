@@ -39,6 +39,7 @@ There are multiple tutorials about these things, here are some I used as a refer
 * https://github.com/drduh/YubiKey-Guide
 * https://florin.myip.org/blog/easy-multifactor-authentication-ssh-using-yubikey-neo-tokens
 * https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/
+* https://rnorth.org/gpg-and-ssh-with-yubikey-for-mac
 
 Here's a short summary. I use a Mac, so all steps are not appropriate for Linux or Windows, ability to reason required.
 
@@ -62,6 +63,15 @@ Pinentry program is used by gpg to ask for your PIN code (in case of Yubikey) or
 
 Invalid pinentry configuration will prevent Yubikey from working.
 
+### Note about the modes and ykpersonalize
+
+Most tutorials suggest setting the mode of the Yubikey with ```ykpersonalize -m82```. I suggest don't do that because Yubikeys sold after 2015 should ship with proper settings preconfigured. I either accidentally bricked my first Yubikey 4 or it had some production flaw, but it can't function as a smart card device. U2F works though.
+
+Opening up [NEO Manager](https://www.yubico.com/support/knowledge-base/categories/articles/yubikey-neo-manager/) you should see something like this:
+
+![NEO manager](neoman.png)
+
+CCID mode is required for accessing the smart card functionality on the Yubikey.
 
 ### Generate keys
 
