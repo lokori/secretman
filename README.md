@@ -193,7 +193,9 @@ This is free and does not depend on any particular software vendor for security 
 
 ## Use-case 3: Secure SSH authentication
 
-See (http://ryanlue.com/posts/2017-06-29-gpg-for-ssh-auth).
+See:
+* http://ryanlue.com/posts/2017-06-29-gpg-for-ssh-auth
+* https://blog.habets.se/2016/01/Yubikey-4-for-SSH-with-physical-presence-proof.html
 
 Secret key only suitable for authentication is on your Yubikey (per the preparations earlier). Public key is on your local machine.
 
