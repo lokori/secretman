@@ -15,9 +15,9 @@ Yubikey is not unique, there are other similar products emerging, such as [OnlyK
 is essentially similar to Yubikey.
 
 Being a programmer I want the solution to have three primary properties:
-# Support command line access and automation as much as possible. 
-# There must be a way to recover if the Yubikey is lost or destroyed and one should test the recovery plan in advance to make sure it actually works.
-# Should not require me to trust blackbox 3rd party products. 
+1. Support command line access and automation as much as possible. 
+2. There must be a way to recover if the Yubikey is lost or destroyed and one should test the recovery plan in advance to make sure it actually works.
+3. Should not require me to trust blackbox 3rd party products. 
 
 Arguably, Yubikey itself is a commercial closed source product, but I'm fine with that. Even if the product had some flaw in it's design, physical access to my Yubikey is a significant barrier against attacks.
 
