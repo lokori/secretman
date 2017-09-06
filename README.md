@@ -214,15 +214,14 @@ If everything is ok, now your authentication to a remote server should not depen
 
 ## Use-case 4: AWS multi-factor authentication
 
-In progress.
-
 Amazon doesn't support FIDO U2F. Necessary to secure both management console and AWS CLI client.
+I'm assuming you have already created users in AWS and installed CLI tools. 
 
 ### Console with Yubikey Authenticator
 
 * [Download Yubikey Authenticator](https://www.yubico.com/support/knowledge-base/categories/articles/yubico-authenticator-download/) to emulate Google Authenticator TOTP protocol. 
 * Enable MFA from AWS console for the user.
-* Setup a backup device (offline) or save the Authenticator seed (QR-code) in a safe offline storage. Otherwise you may get locked out of your account after Yubikey is lost or destroyed one day.
+* Setup a backup device (offline) or save the Authenticator seed (QR-code) in a safe offline storage. Otherwise you may get locked out of your account after Yubikey is lost or destroyed one day. *BE VERY CAREFUL HERE*
 * Scan QR code for Authenticator (Authenticator captures it from the computer's screen).
 
 ![Authenticator setup](/authenticator.png)
@@ -232,15 +231,79 @@ Amazon doesn't support FIDO U2F. Necessary to secure both management console and
 After this, the user can only log in to the AWS console if the Yubikey is physically present on the machine.
 
 
+### AWS CLI interface
 
+* Create secret key for cli access
+* update ~/.aws/config appropriately
+* Test that everything works without MFA:
 
+```
+aws sts get-caller-identity --profile mfa-testi
+{
+    "Account": "6666125989891285952", 
+    "UserId": "AIDAJBGASLKLK7Rq2C5U", 
+    "Arn": "arn:aws:iam::6666512345252:user/mfa-testi"
+}
+```
 
-Some material for cli:
+* Install ykman and other tools from [Yubikey Manager](https://developers.yubico.com/yubikey-manager/)
 
+* Create test user
+* Attach the Virtual MFA Device to access key use with policy. Like this:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "ec2:*",
+      "s3:*"
+    ],
+    "Resource": ["*"],
+    "Condition": {"Bool": {"aws:MultiFactorAuthPresent": "true"}}
+  }]
+}
+```
+
+* Test that your policy can't access the resources:
+```
+aws s3 ls --profile mfa-testi
+
+A client error (AccessDenied) occurred when calling the ListBuckets operation: Access Denied
+```
+
+* To use CLI, get temporary session token first. Like this:
+```
+ aws sts get-session-token --serial-number arn:aws:iam::6666666652:mfa/mfa-testi --token-code 310353 --profile mfa-testi
+```
+
+* export credentials for CLI:
+```
+export AWS_ACCESS_KEY_ID=kk
+export AWS_SECRET_ACCESS_KEY=kk
+export AWS_SESSION_TOKEN=kk
+```
+
+* Test that you can now access the resources having authenticated using the session token
+```
+aws s3 ls
+```
+
+* This procedure can be scripted. I used [woowa's script](https://gist.github.com/woowa-hsw0/caa3340e2a7b390dbde81894f73e379d) and fixed a few things. See [awsenv.sh](awsenv.sh) as a reference for automated session token + authentication.
+
+More material about AWS and Yubikey MFA:
+
+* https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/
+* http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html#MFAProtectedAPI-user-mfa
 * https://github.com/phrase/aws-mfa
-* https://gist.github.com/woowa-hsw0/caa3340e2a7b390dbde81894f73e379d
 
 
+### Threat scenarios
+
+Simply getting secret access key from ~/.aws/config no longer allows direct access to AWS CLI resources. The authenticator codes can be accessed by the attacker when Yubikey is attached to your computer, but temporary session token from AWS has time-to-live. Basically the attacker must risk detection as you are present on your computer if  the attacker wants to do actions with your session token.
+
+Not perfect, but an order of magnitude better than compromising access if the local files can be read by the attacker.
 
 
 ## Use-case 5: Signing data and files
