@@ -14,6 +14,13 @@ to extract the keys or make a copy of the key).
 Yubikey is not unique, there are other similar products emerging, such as [OnlyKey](https://www.amazon.com/OnlyKey-Color-Password-Manager-Obsolete/dp/B06Y1CSRZX), which
 is essentially similar to Yubikey.
 
+Being a programmer I want the solution to have three primary properties:
+# Support command line access and automation as much as possible. 
+# There must be a way to recover if the Yubikey is lost or destroyed and one should test the recovery plan in advance to make sure it actually works.
+# Should not require me to trust blackbox 3rd party products. 
+
+Arguably, Yubikey itself is a commercial closed source product, but I'm fine with that. Even if the product had some flaw in it's design, physical access to my Yubikey is a significant barrier against attacks.
+
 Overview of the topics and possibilities:
 
 ![Yubikey mindmap](/img/yubikey-map.png)
@@ -21,19 +28,13 @@ Overview of the topics and possibilities:
 
 ## Use-case 1: two-factor authentication, using FIDO U2F
 
-The most common two-factor authentication is perhaps [Google Authenticator](https://en.wikipedia.org/wiki/Google_Authenticator) used with a phone. SMS being perhaps the second most popular. RSA dongles work, but they
-cost money and can't be used for anything else so they are out for most normal use cases.
+The most common two-factor authentication is perhaps [Google Authenticator](https://en.wikipedia.org/wiki/Google_Authenticator) used with a phone. SMS being perhaps the second most popular. RSA dongles work, but they cost money and can't be used for anything else so they are out for most normal use cases.
 
 FIDO U2F is a new standard and super simple way for user to authenticate actions for a web application. This [FIDO U2F tutorial](https://fidoalliance.org/assets/downloads/FIDO-U2F-UAF-Tutorial-v1.pdf) explains how it works internally. The important thing is that a web browser (and web application) is allowed to talk with FIDO U2F compliant USB device without resorting to complicated things like WebUSB. 
 
-Compared to phone, this is better from the security point of view.
+Compared to a phone, this is better from the security point of view. Yubikey supports other authentication mechanisms and can be used to emulate Google Authenticator, but FIDO U2F is usable for normal people without technical knowledge. The other use-cases I have considered are not so easy for users.
 
-Yubikey supports other authentication mechanisms and can be used to emulate Google Authenticator, but FIDO U2F is usable for normal people without technical knowledge.
-
-
-## Technical preparations and precautions
-
-Being a programmer I want the solution to support command line access and automation as much as possible. Also, one must plan for the possibility that Yubikey is lost or destroyed for some reason. There must be a way to recover and one should test the recovery plan in advance to make sure it actually works.
+# Technical preparations and precautions for advanced use 
 
 There are multiple tutorials about these things, here are some I used as a reference:
 * https://github.com/drduh/YubiKey-Guide
