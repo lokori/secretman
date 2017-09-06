@@ -84,14 +84,24 @@ gpg --edit-key XXXX
 
 select keys one at a time, transfer ```keytocard``` and ```save```
 
-* Make sure everything is oks
-
+* Make sure everything is ok
 ```
 gpg --card-status
 gpg --list-secret-keys
 ```
 
-keylisting should show > for the moved keys.
+keylisting should show > for the moved keys. Something like this:
+```
+sec#  rsa4096 2016-08-23 [SC]
+      3KOKOASKOKASDOKASDOKADS
+uid           [ultimate] Antti Virtanen <antti.virtanen@solita.fi>
+ssb#  rsa4096 2016-08-23 [E] [expires: 2020-08-23]
+ssb>  rsa4096 2017-09-04 [E]
+ssb>  rsa4096 2017-09-04 [S]
+ssb>  rsa4096 2017-09-04 [A]
+```
+
+
 
 * As explained in the referenced tutorial, it is reasonable to remove the ultimate master key from the system to prevent anyone from creating more subkeys.
 * After this the subkeys are "untrusted" and gpg will ask for confirmation. Make it trustworthy again to get rid of this:
@@ -122,7 +132,7 @@ gpg --encrypt --armor --recipient XXXXX > secret.txt
 ```
 
 And decrypt:
-cat secret.txt | gpg --decrypt
+```cat secret.txt | gpg --decrypt```
 
 ### Poke/peek scripts
 
@@ -301,6 +311,8 @@ aws s3 ls
 ```
 
 * This procedure can be scripted. I used [woowa's script](https://gist.github.com/woowa-hsw0/caa3340e2a7b390dbde81894f73e379d) and fixed a few things. See [awsenv.sh](awsenv.sh) as a reference for automated session token + authentication.
+
+* you could alternatively use something like ```mfa_serial = arn:aws:iam::1313413414313:mfa/``` on ~/.aws/config and the CLI then prompts for manually inputting the MFA code.
 
 More material about AWS and Yubikey MFA:
 
