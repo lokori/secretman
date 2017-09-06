@@ -49,7 +49,7 @@ Here's a short summary. I use a Mac, so all steps are not appropriate for Linux 
 
 (Assumed that you are using Homebrew, but you almost certainly are if you are a developer working with a Mac)
 
-See (https://github.com/Homebrew/homebrew-core/issues/14737)
+See https://github.com/Homebrew/homebrew-core/issues/14737
 ```
 brew install pinentry-mac
 echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
@@ -65,7 +65,9 @@ Invalid pinentry configuration will prevent Yubikey from working.
 
 ### Generate keys
 
-See (https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/) for a good reference.
+First, some reference material:
+* https://blog.liw.fi/posts/2017/05/29/using_a_yubikey_4_for_ensafening_one_s_encryption/ is a good reference.
+* https://riseup.net/en/security/message-security/openpgp/best-practices is a more comprehensive reference outside the scope of using Yubikey.
 
 * Make backup copies of the keys, XX for each key id
 ```
