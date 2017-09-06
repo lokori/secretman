@@ -149,8 +149,18 @@ gpg: encrypted with 4096-bit RSA key, ID D2E72CF23AD1899D, created 2017-09-04
 secret two finger death punch
 ```
 
-NOTE: your secrets may get recorded in the command shell history. Do not leave them there.
+*NOTE: your secrets may get recorded in the command shell history. Do not leave them there.*
 
+### Handy tweaks for poke/peek
+
+```
+cat ~/.bash_profile
+alias smanpoke=~/projects/secretman/poke.sh
+alias smanpeek=~/projects/secretman/peek.sh
+alias smanls="ls ~/.secretman/"
+```
+
+In my case ~/.secretman is actually a symbolic link to another folder, which gets automatically copied to cloud. So the encrypted data is automatically backed up, but even if the cloud service is compromised, my secrets can't be stolen by the attacker. Not perfect, but good enough for my needs.
 
 ### Making sure it can be decrypted even without the Yubikey in an emergency:
 
