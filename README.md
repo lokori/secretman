@@ -185,6 +185,9 @@ alias smanls="ls ~/.secretman/"
 
 In my case ~/.secretman is actually a symbolic link to another folder, which gets automatically copied to cloud. So the encrypted data is automatically backed up, but even if the cloud service is compromised, my secrets can't be stolen by the attacker. Not perfect, but good enough for my needs.
 
+*UPDATE:* I learnt recently that a project called [pass](https://www.passwordstore.org/) is essentially similar, but slightly more sophisticated, version of my scripts. The implementation has the same core idea of using filesystem to store the passwords encrypted. 
+
+
 ### Making sure it can be decrypted even without the Yubikey in an emergency:
 
 *BE VERY CAREFUL.*
