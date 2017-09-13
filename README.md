@@ -74,6 +74,9 @@ Opening up [NEO Manager](https://www.yubico.com/support/knowledge-base/categorie
 
 CCID mode is required for accessing the smart card functionality on the Yubikey.
 
+Apparently [Yubikey Manager](https://developers.yubico.com/yubikey-manager/) is a somewhat enchanced version of NEO Manager and replaces it. Confusing? Yes.
+
+
 ### Generate keys
 
 First, some reference material:
@@ -122,6 +125,22 @@ ssb>  rsa4096 2017-09-04 [A]
 gpg --edit-key XXXXX
 trust
 ```
+
+### Setting touch mode for the keys
+
+By default, Yubikey does not require touch triggering for the keys, while it may require a PIN code. It appears that setting the touch mode for the keys can't be done using the normal Yubico provided management tools, but it's possible to set this through more direct means.
+
+[yubitouch.sh](https://github.com/a-dma/yubitouch) is a script which talks directly to the Yubikey and allows setting touch feature for the keys. 
+
+It is a matter of opinion if this is a good thing, but certainly it adds some security as Mallory can't piggybag with your PIN entry when you enter the pin. On the other hand, it may be annoying to press the button every time.
+
+Especially decrypt may benefit from the touch requirement. It essentially prevents Mallory from decrypting all your secrets if he captures the PIN when you enter it.
+
+```
+./yubitouch.sh dec on
+All done!
+```
+
 
 
 ### Set Yubi PIN codes
