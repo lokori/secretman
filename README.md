@@ -271,7 +271,9 @@ If everything is ok, now your authentication to a remote server should not depen
 
 ## Use-case 4: AWS multi-factor authentication
 
-Amazon doesn't support FIDO U2F. Necessary to secure both management console and AWS CLI client.
+Update 2.10. 2018: AWS has now added support for Yubikey in the web console. See  [AWS instructions for management console](https://aws.amazon.com/blogs/security/use-yubikey-security-key-sign-into-aws-management-console/) for how to set it up. 
+
+Amazon doesn't support FIDO U2F or Yubikey for AWS CLI client at the moment. This likely to change. 
 I'm assuming you have already created users in AWS and installed CLI tools. 
 
 ### Console with Yubikey Authenticator
